@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
 
-# Create your views here.
+from rest_framework import viewsets
+
+from proj_app.serializers import UserSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
